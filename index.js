@@ -25,3 +25,21 @@ app.post('/create', (req, res) => {
   res.json({ apiKey })
 })
 
+// Cek validitas API Key
+app.post('/cekapi', (req, res) => {
+  const userKey = req.body.apiKey // API key yang dikirim dari frontend
+
+  if (!userKey) {
+    return res.status(400).json({ valid: false, message: "API Key tidak boleh kosong" })
+  }
+
+  if (userKey === myApiKey) {
+    return res.json({ valid: true, message: "API Key valid" })
+  }
+
+  return res.json({ valid: false, message: "API Key tidak valid" })
+})
+
+app.listen(port, () => {
+  console.log(`Server berjalan di http://localhost:${port}`)
+})
