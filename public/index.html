@@ -78,6 +78,7 @@
     <button onclick="buatApiKey()">Create API Key</button>
 
     <textarea id="apikey" readonly placeholder="API Key akan muncul di sini..."></textarea>
+    <button id="copyBtn" onclick="copyApiKey()">Copy</button>
   </div>
 
   <script>
@@ -94,7 +95,19 @@
       }
     }
 
-    
+    function copyApiKey() {
+      const textarea = document.getElementById("apikey");
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // untuk mobile
+
+      navigator.clipboard.writeText(textarea.value)
+        .then(() => {
+          alert("✅ API Key berhasil disalin!");
+        })
+        .catch(() => {
+          alert("❌ Gagal menyalin API Key.");
+        });
+    }
   </script>
 </body>
 </html>
