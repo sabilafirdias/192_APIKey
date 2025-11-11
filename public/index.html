@@ -71,3 +71,30 @@
       background-color: #ff99c2;
     }
   </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Buat API Key</h1>
+    <button onclick="buatApiKey()">Create API Key</button>
+
+    <textarea id="apikey" readonly placeholder="API Key akan muncul di sini..."></textarea>
+  </div>
+
+  <script>
+    async function buatApiKey() {
+      const textarea = document.getElementById("apikey");
+      textarea.value = "Memproses...";
+
+      try {
+        const response = await fetch("/create", { method: "POST" });
+        const data = await response.json();
+        textarea.value = data.apiKey;
+      } catch (err) {
+        textarea.value = "Gagal menghubungi server.";
+      }
+    }
+
+    
+  </script>
+</body>
+</html>
